@@ -1,15 +1,15 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { ContactForm } from './components/ContactForm/ContactForm';
 import { Filter } from './components/Filter/Filter';
 import { ContactList } from './components/ContactList/ContactList';
 
-import { addContact, deleteContact } from 'redux/contacts/contacts-actions';
+import { addContact, deleteContact } from 'redux/contacts/contacts-slice';
+import  setFilter  from 'redux/filter/filter-slice';
 
 export const App = () => {
   const contacts = useSelector(store => store.contacts)
-  const [ filter, setFilter ] = useState( '' );
+  const filter = useSelector(store => store.filter)
   
   const dispatch = useDispatch();
 
@@ -44,7 +44,8 @@ const number = data.number;
   };
 
   const changeFilter = e => {
-    setFilter(e.target.value);
+const action = setFilter(e.target.value)
+    dispatch( action );
   };
 
   const getVisibleContacts = () => {
