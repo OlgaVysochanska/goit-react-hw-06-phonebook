@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './ContactForm.module.css';
 
-export const ContactForm = ({ onHandleSubmit }) => {
+export const ContactForm = ({ onSubmit }) => {
   let inputValues = {
     name: '',
     number: '',
@@ -23,7 +23,7 @@ export const ContactForm = ({ onHandleSubmit }) => {
       className={styles.form}
       onSubmit={e => {
         e.preventDefault();
-        onHandleSubmit(inputValues);
+        onSubmit(inputValues);
         clearForm(e);
       }}
     >
@@ -59,5 +59,5 @@ export const ContactForm = ({ onHandleSubmit }) => {
 };
 
 ContactForm.propTypes = {
-  onHandleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
