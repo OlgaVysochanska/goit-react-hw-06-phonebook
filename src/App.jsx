@@ -5,31 +5,13 @@ import { Filter } from './components/Filter/Filter';
 import { ContactList } from './components/ContactList/ContactList';
 
 import { addContact, deleteContact } from 'redux/contacts/contacts-slice';
-import  setFilter  from 'redux/filter/filter-slice';
+import { setFilter } from 'redux/filter/filter-slice';
 
 export const App = () => {
-  const contacts = useSelector(store => store.contacts)
-  const filter = useSelector(store => store.filter)
-  
+  const contacts = useSelector(store => store.contacts);
+  const filter = useSelector(store => store.filter);
+
   const dispatch = useDispatch();
-
-  // const contactsRef = useRef(contacts.lenght);
-
-  // useEffect(() => {
-  //   const savedContacts = JSON.parse(localStorage.getItem('contacts'));
-
-  //   if (savedContacts) {
-  //     setContacts([...savedContacts]);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (contactsRef.current === contacts.length) {
-  //     return;
-  //   }
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  //   contactsRef.current = contacts.length;
-  // }, [contacts]);
 
   const handleAddContact = data => {
     const name = data.name;
@@ -38,14 +20,14 @@ export const App = () => {
       return;
     }
 
-const number = data.number;
-    const action = addContact( { name, number } );
-    dispatch( action );
+    const number = data.number;
+    const action = addContact({ name, number });
+    dispatch(action);
   };
 
   const changeFilter = e => {
-const action = setFilter(e.target.value)
-    dispatch( action );
+    const action = setFilter(e.target.value);
+    dispatch(action);
   };
 
   const getVisibleContacts = () => {
@@ -56,8 +38,8 @@ const action = setFilter(e.target.value)
   };
 
   const handleDeleteContact = id => {
-    const action = deleteContact( id );
-    dispatch( action );
+    const action = deleteContact(id);
+    dispatch(action);
   };
 
   return (
@@ -67,7 +49,10 @@ const action = setFilter(e.target.value)
 
       <h2>Contacts</h2>
       <Filter value={filter} onChangeFilter={changeFilter} />
-      <ContactList contacts={getVisibleContacts()} deleting={handleDeleteContact} />
+      <ContactList
+        contacts={getVisibleContacts()}
+        deleting={handleDeleteContact}
+      />
     </>
   );
 };
