@@ -4,8 +4,8 @@ import { ContactForm } from './components/ContactForm/ContactForm';
 import { Filter } from './components/Filter/Filter';
 import { ContactList } from './components/ContactList/ContactList';
 
-import { addContact, deleteContact } from 'redux/contacts/contacts-slice';
-import { setFilter } from 'redux/filter/filter-slice';
+import { addContact, deleteContact } from 'redux/contacts/contactsSlice';
+import { setFilter } from 'redux/filter/filterSlice';
 
 export const App = () => {
   const contacts = useSelector(store => store.contacts);
