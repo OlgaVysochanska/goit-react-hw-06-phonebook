@@ -1,58 +1,16 @@
-import { useSelector, useDispatch } from 'react-redux';
-
 import { ContactForm } from './components/ContactForm/ContactForm';
 import { Filter } from './components/Filter/Filter';
 import { ContactList } from './components/ContactList/ContactList';
 
-import { addContact, deleteContact } from 'redux/contacts/contactsSlice';
-import { setFilter } from 'redux/filter/filterSlice';
-
 export const App = () => {
-  const contacts = useSelector(store => store.contacts);
-  const filter = useSelector(store => store.filter);
-
-  const dispatch = useDispatch();
-
-  const handleAddContact = data => {
-    const name = data.name;
-    if (contacts.find(contact => contact.name === name)) {
-      alert(`${name} is already in contacts`);
-      return;
-    }
-
-    const number = data.number;
-    const action = addContact({ name, number });
-    dispatch(action);
-  };
-
-  const changeFilter = e => {
-    const action = setFilter(e.target.value);
-    dispatch(action);
-  };
-
-  const getVisibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
-
-  const handleDeleteContact = id => {
-    const action = deleteContact(id);
-    dispatch(action);
-  };
-
   return (
     <>
       <h1>Phonebook</h1>
-      <ContactForm onSubmit={handleAddContact} />
+      <ContactForm />
 
       <h2>Contacts</h2>
-      <Filter value={filter} onChangeFilter={changeFilter} />
-      <ContactList
-        contacts={getVisibleContacts()}
-        deleting={handleDeleteContact}
-      />
+      <Filter />
+      <ContactList />
     </>
   );
 };
